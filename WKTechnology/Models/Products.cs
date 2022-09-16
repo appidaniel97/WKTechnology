@@ -10,8 +10,6 @@ namespace WKTechnology.Models
         
         [Column("Id")]
         [Display(Name="Código")]
-        //[Required(ErrorMessage = "Campo obrigatório"), Key]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
         public int? IdCategory { get; set; }
        
