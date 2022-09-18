@@ -14,10 +14,10 @@ namespace WKTechnology.Models
         public int? IdCategory { get; set; }
        
         [Column("Description")]
-        [Display(Name = "Descrição"), Required(ErrorMessage = "Campo obrigatório:Descrição")]
+        [Display(Name = "Descrição"), Required(ErrorMessage = "Campo obrigatório")]
         public string Description { get; set; }
 
-        [Display(Name = "NCM")]
+        [Display(Name = "NCM"), Required(ErrorMessage = "Campo obrigatório")]
         [Column("Ncm")]
         public string Ncm { get; set; }
 
@@ -29,10 +29,11 @@ namespace WKTechnology.Models
         [Column("PriceSale")]
         public decimal? PriceSale { get; set; }
 
-        [Display(Name = "Categoria")]
-        [Column("IdCategory")]
+        
+        [Column("Categoria")]
         [ForeignKey(nameof(IdCategory))]
         [InverseProperty(nameof(Categories.Products))]
-        public virtual Categories IdCategoryNavigation { get; set; }
+        [Display(Name = "Categoria")]
+        public virtual Categories CategoriaNavigation { get; set; }
     }
 }

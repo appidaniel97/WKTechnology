@@ -18,7 +18,7 @@ namespace WKTechnology.Models
         [Display(Name = "Categoria")]
         public string NameCategory { get; set; }
 
-        [InverseProperty("IdCategoryNavigation")]
+        [InverseProperty("CategoriaNavigation")]
         public virtual ICollection<Products> Products { get; set; }
 
     }

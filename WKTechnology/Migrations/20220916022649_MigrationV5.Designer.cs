@@ -23,7 +23,7 @@ namespace WKTechnology.Migrations
 
             modelBuilder.Entity("WKTechnology.Models.Categories", b =>
                 {
-                    b.Property<int>("IdCategory")
+                    b.Property<int>("Categoria")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
@@ -32,7 +32,7 @@ namespace WKTechnology.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("NameCategory");
 
-                    b.HasKey("IdCategory");
+                    b.HasKey("Categoria");
 
                     b.ToTable("Category");
                 });
@@ -49,7 +49,7 @@ namespace WKTechnology.Migrations
                         .HasColumnType("longtext")
                         .HasColumnName("Description");
 
-                    b.Property<int>("IdCategory")
+                    b.Property<int>("Categoria")
                         .HasColumnType("int");
 
                     b.Property<string>("Ncm")
@@ -67,20 +67,20 @@ namespace WKTechnology.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("IdCategory");
+                    b.HasIndex("Categoria");
 
                     b.ToTable("Products");
                 });
 
             modelBuilder.Entity("WKTechnology.Models.Products", b =>
                 {
-                    b.HasOne("WKTechnology.Models.Categories", "IdCategoryNavigation")
+                    b.HasOne("WKTechnology.Models.Categories", "CategoriaNavigation")
                         .WithMany("Products")
-                        .HasForeignKey("IdCategory")
+                        .HasForeignKey("Categoria")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("IdCategoryNavigation");
+                    b.Navigation("CategoriaNavigation");
                 });
 
             modelBuilder.Entity("WKTechnology.Models.Categories", b =>

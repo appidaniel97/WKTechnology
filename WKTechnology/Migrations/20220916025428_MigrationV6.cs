@@ -9,16 +9,16 @@ namespace WKTechnology.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             //migrationBuilder.DropForeignKey(
-            //    name: "FK_Products_Category_IdCategory",
+            //    name: "FK_Products_Category_Categoria",
             //    table: "Products");
 
             //migrationBuilder.RenameColumn(
-            //    name: "IdCategory",
+            //    name: "Categoria",
             //    table: "Category",
             //    newName: "Id");
 
             migrationBuilder.AlterColumn<int>(
-                name: "IdCategory",
+                name: "Categoria",
                 table: "Products",
                 type: "int",
                 nullable: true,
@@ -26,9 +26,9 @@ namespace WKTechnology.Migrations
                 oldType: "int");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Products_Category_IdCategory",
+                name: "FK_Products_Category_Categoria",
                 table: "Products",
-                column: "IdCategory",
+                column: "Categoria",
                 principalTable: "Category",
                 principalColumn: "Id");
         }
@@ -36,16 +36,16 @@ namespace WKTechnology.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Products_Category_IdCategory",
+                name: "FK_Products_Category_Categoria",
                 table: "Products");
 
             migrationBuilder.RenameColumn(
                 name: "Id",
                 table: "Category",
-                newName: "IdCategory");
+                newName: "Categoria");
 
             migrationBuilder.AlterColumn<int>(
-                name: "IdCategory",
+                name: "Categoria",
                 table: "Products",
                 type: "int",
                 nullable: false,
@@ -55,11 +55,11 @@ namespace WKTechnology.Migrations
                 oldNullable: true);
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Products_Category_IdCategory",
+                name: "FK_Products_Category_Categoria",
                 table: "Products",
-                column: "IdCategory",
+                column: "Categoria",
                 principalTable: "Category",
-                principalColumn: "IdCategory",
+                principalColumn: "Categoria",
                 onDelete: ReferentialAction.Cascade);
         }
     }

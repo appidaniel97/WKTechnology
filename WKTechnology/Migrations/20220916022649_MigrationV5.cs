@@ -10,7 +10,7 @@ namespace WKTechnology.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<int>(
-                name: "IdCategory",
+                name: "Categoria",
                 table: "Products",
                 type: "int",
                 nullable: false,
@@ -32,14 +32,14 @@ namespace WKTechnology.Migrations
                 .Annotation("MySql:CharSet", "utf8mb4");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Products_IdCategory",
+                name: "IX_Products_Categoria",
                 table: "Products",
-                column: "IdCategory");
+                column: "Categoria");
 
             migrationBuilder.AddForeignKey(
-                name: "FK_Products_Category_IdCategory",
+                name: "FK_Products_Category_Categoria",
                 table: "Products",
-                column: "IdCategory",
+                column: "Categoria",
                 principalTable: "Category",
                 principalColumn: "Id",
                 onDelete: ReferentialAction.Cascade);
@@ -48,18 +48,18 @@ namespace WKTechnology.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropForeignKey(
-                name: "FK_Products_Category_IdCategory",
+                name: "FK_Products_Category_Categoria",
                 table: "Products");
 
             migrationBuilder.DropTable(
                 name: "Category");
 
             migrationBuilder.DropIndex(
-                name: "IX_Products_IdCategory",
+                name: "IX_Products_Categoria",
                 table: "Products");
 
             migrationBuilder.DropColumn(
-                name: "IdCategory",
+                name: "Categoria",
                 table: "Products");
         }
     }

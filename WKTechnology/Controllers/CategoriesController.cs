@@ -10,24 +10,25 @@ using WKTechnology.Models;
 
 namespace WKTechnology.Controllers
 {
-    public class CategoryController : Controller
+    public class CategoriesController : Controller
     {
         private readonly Context _context;
 
-        public CategoryController(Context context)
+        public CategoriesController(Context context)
         {
             _context = context;
         }
-
-        // GET: Products
+      
+        // GET: Categories
         public async Task<IActionResult> Index()
         {
-            return _context.Categories != null ?
-                        View(await _context.Categories.ToListAsync()) :
-                        Problem("Entity set 'Context.Products'  is null.");
+
+             return _context.Categories != null ?    
+                          View(await _context.Categories.ToListAsync()) :
+                          Problem("Entity set 'Context.Categories'  is null.");
         }
 
-        // GET: Products/Details/5
+        // GET: Categories/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -45,39 +46,37 @@ namespace WKTechnology.Controllers
             return View(categories);
         }
 
-        // GET: Products/Create
+        // GET: Categories/Create
         public IActionResult Create()
         {
+            var list = new SelectList(_context.Categories.ToList(), "Id", "NameCategory");
+            ViewBag.List = list;
             return View();
         }
 
-        // POST: Products/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Categories/Create  
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Id,NameCategory")] Categories categories)
-        {
-            //if (ModelState.IsValid)
-            //{
-            int test = categories.Id;
-
-            _context.Add(categories);
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
-            //}
-            return View(categories);
+        {                         
+                _context.Add(categories);
+                await _context.SaveChangesAsync();
+                return RedirectToAction(nameof(Index));
+          
+                return View(categories);
         }
 
-        // GET: Products/Edit/5
+        // GET: Categories/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
+
             if (id == null || _context.Categories == null)
             {
                 return NotFound();
             }
-
+            
             var categories = await _context.Categories.FindAsync(id);
+
             if (categories == null)
             {
                 return NotFound();
@@ -85,20 +84,16 @@ namespace WKTechnology.Controllers
             return View(categories);
         }
 
-        // POST: Products/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // POST: Categories/Edit/5    
         [HttpPost]
-        //[ValidateAntiForgeryToken]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,NameCategory")] Categories categories)
         {
             if (id != categories.Id)
             {
                 return NotFound();
             }
-
-            if (ModelState.IsValid)
-            {
+          
                 try
                 {
                     _context.Update(categories);
@@ -106,7 +101,7 @@ namespace WKTechnology.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!CategoryExists(categories.Id))
+                    if (!CategoriesExists(categories.Id))
                     {
                         return NotFound();
                     }
@@ -116,11 +111,11 @@ namespace WKTechnology.Controllers
                     }
                 }
                 return RedirectToAction(nameof(Index));
-            }
+            
             return View(categories);
         }
 
-        // GET: Products/Delete/5
+        // GET: Categories/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.Categories == null)
@@ -138,28 +133,28 @@ namespace WKTechnology.Controllers
             return View(categories);
         }
 
-        // POST: Products/Delete/5
+        // POST: Categories/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             if (_context.Categories == null)
             {
-                return Problem("Entity set 'Context.Products'  is null.");
+                return Problem("Entity set 'Context.Categories'  is null.");
             }
             var categories = await _context.Categories.FindAsync(id);
             if (categories != null)
             {
                 _context.Categories.Remove(categories);
             }
-
+            
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool CategoryExists(int id)
+        private bool CategoriesExists(int id)
         {
-            return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
+          return (_context.Categories?.Any(e => e.Id == id)).GetValueOrDefault();
         }
     }
 }

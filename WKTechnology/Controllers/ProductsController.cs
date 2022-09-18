@@ -22,7 +22,7 @@ namespace WKTechnology.Controllers
         // GET: Products
         public async Task<IActionResult> Index()
         {
-            var ret = _context.Products.Include(e => e.IdCategoryNavigation).AsNoTracking();
+            var ret = _context.Products.Include(e => e.CategoriaNavigation).AsNoTracking();
             return View(ret);
               //return _context.Products != null ?    
                 //          View(await _context.Products.ToListAsync()) :
@@ -58,7 +58,7 @@ namespace WKTechnology.Controllers
         // POST: Products/Create  
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description,Ncm,PriceCost,PriceSale,IdCategory")] Products products)
+        public async Task<IActionResult> Create([Bind("Id,Description,Ncm,PriceCost,PriceSale,Categoria")] Products products)
         {                         
                 _context.Add(products);
                 await _context.SaveChangesAsync();
@@ -92,7 +92,7 @@ namespace WKTechnology.Controllers
         // POST: Products/Edit/5    
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,Ncm,PriceCost,PriceSale,IdCategory")] Products products)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Description,Ncm,PriceCost,PriceSale,Categoria")] Products products)
         {
 
             var list = new SelectList(_context.Categories.ToList(), "Id", "NameCategory", products.IdCategory);
@@ -134,7 +134,7 @@ namespace WKTechnology.Controllers
             }
 
             var products = await _context.Products
-                .FirstOrDefaultAsync(m => m.Id == id);
+                .FirstOrDefaultAsync(m => m.Id == id); 
             if (products == null)
             {
                 return NotFound();
